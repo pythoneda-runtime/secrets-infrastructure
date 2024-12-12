@@ -20,12 +20,12 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
 from dbus_next import BusType
-from pythoneda.runtime.secrets.events import (
+from pythoneda.shared.runtime.secrets.events import (
     CredentialIssued,
     CredentialProvided,
     CredentialRequested,
 )
-from pythoneda.runtime.secrets.events.infrastructure.dbus import (
+from pythoneda.shared.runtime.secrets.events.infrastructure.dbus import (
     DbusCredentialIssued,
     DbusCredentialProvided,
     DbusCredentialRequested,
@@ -46,7 +46,8 @@ class SecretsDbusSignalListener(DbusSignalListener):
 
     Collaborators:
         - pythoneda.shared.application.pythoneda.PythonEDA: Receives relevant domain events.
-        - pythoneda.runtime.secrets.events.infrastructure.dbus.*
+        - pythoneda.shared.runtime.secrets.events.*
+        - pythoneda.shared.runtime.secrets.events.infrastructure.dbus.*
     """
 
     def __init__(self):
