@@ -21,14 +21,10 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
 from dbus_next import BusType
 from pythoneda.shared.runtime.secrets.events import (
-    CredentialIssued,
     CredentialProvided,
-    CredentialRequested,
 )
 from pythoneda.shared.runtime.secrets.events.infrastructure.dbus import (
-    DbusCredentialIssued,
     DbusCredentialProvided,
-    DbusCredentialRequested,
 )
 from pythoneda.shared.infrastructure.dbus import DbusSignalEmitter
 from typing import Dict
@@ -63,12 +59,8 @@ class SecretsDbusSignalEmitter(DbusSignalEmitter):
         :rtype: Dict
         """
         result = {}
-        key = self.__class__.full_class_name(CredentialIssued)
-        result[key] = [DbusCredentialIssued, BusType.SYSTEM]
         key = self.__class__.full_class_name(CredentialProvided)
         result[key] = [DbusCredentialProvided, BusType.SYSTEM]
-        key = self.__class__.full_class_name(CredentialRequested)
-        result[key] = [DbusCredentialRequested, BusType.SYSTEM]
 
         return result
 
