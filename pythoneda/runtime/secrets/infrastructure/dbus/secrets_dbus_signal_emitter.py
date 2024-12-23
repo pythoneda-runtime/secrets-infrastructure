@@ -19,15 +19,8 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
-from dbus_next import BusType
-from pythoneda.shared.runtime.secrets.events import (
-    CredentialProvided,
-)
-from pythoneda.shared.runtime.secrets.events.infrastructure.dbus import (
-    DbusCredentialProvided,
-)
 from pythoneda.shared.infrastructure.dbus import DbusSignalEmitter
-from typing import Dict
+from typing import List
 
 
 class SecretsDbusSignalEmitter(DbusSignalEmitter):
@@ -50,19 +43,16 @@ class SecretsDbusSignalEmitter(DbusSignalEmitter):
         """
         Creates a new SecretsDbusSignalEmitter instance.
         """
-        super().__init__("pythoneda.runtime.secrets.events.infrastructure.dbus")
+        super().__init__()
 
-    def signal_emitters(self) -> Dict:
+    @classmethod
+    def event_packages(cls) -> List[str]:
         """
-        Retrieves the configured event emitters.
-        :return: For each event, a list with the event interface and the bus type.
-        :rtype: Dict
+        Retrieves the packages of the supported events.
+        :return: The packages.
+        :rtype: List[str]
         """
-        result = {}
-        key = self.__class__.full_class_name(CredentialProvided)
-        result[key] = [DbusCredentialProvided, BusType.SYSTEM]
-
-        return result
+        return ["pythoneda.runtime.secrets.events.infrastructure.dbus"]
 
 
 # vim: syntax=python ts=4 sw=4 sts=4 tw=79 sr et
